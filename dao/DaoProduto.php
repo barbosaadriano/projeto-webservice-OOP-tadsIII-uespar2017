@@ -8,14 +8,12 @@
 class DaoProduto {
 
     public function listarTodos() {
-        
+
         return array(
-            new ModelProduto(1, "teste 1"),
-            new ModelProduto(2, "teste 2"),
-            new ModelProduto(3, "teste 3"),
-            array(4,"teste 5"),
+            (Array) new ModelProduto(1, "teste 1"),
+            (array) new ModelProduto(2, "teste 2"),
+            (array) new ModelProduto(3, "teste 3"),
         );
-        
     }
 
 }

@@ -6,11 +6,31 @@
  */
 interface ControllerInterface {
 
-    public function create();
+    /**
+     * 
+     * @param RequestInterface $req
+     * @return ResponseJsonInterface Description
+     */
+    public function create(RequestInterface $req);
 
-    public function update();
+    /**
+     * 
+     * @param RequestInterface $req
+     * @return ResponseJsonInterface Description
+     */
+    public function update(RequestInterface $req);
 
-    public function listar();
+    /**
+     * 
+     * @param RequestInterface $req
+     * @return ResponseJsonInterface Description
+     */
+    public function listar(RequestInterface $req);
 
-    public function delete();
+    /**
+     * 
+     * @param RequestInterface $req
+     * @return ResponseJsonInterface Description
+     */
+    public function delete(RequestInterface $req);
 }

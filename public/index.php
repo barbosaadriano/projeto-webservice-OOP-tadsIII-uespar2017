@@ -21,9 +21,9 @@ header('Content-Type: Application/json; charset=utf-8');
 try {
     App::executar();
 } catch (Exception $ex) {
-    echo json_encode(array(
-        'status' => ResponseJsonInterface::STATUS_FAIL,
-        'messageError' => $ex->getMessage(),
-        'data' => array()
-    ));
+    $resp = new DefaultResponse();
+    $resp->setStatus(ResponseJsonInterface::STATUS_FAIL);
+    $resp->setMessageError($ex->getMessage());
+    $resp->setData((array) $ex);
+    $resp->response();
 }

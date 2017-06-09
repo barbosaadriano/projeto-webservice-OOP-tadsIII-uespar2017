@@ -23,23 +23,34 @@ class App {
 
         if (class_exists($controller)) {
             try {
+                //NOVO >>>>>>
+                if (in_array($reqMode, array('PUT', 'DELETE'))) {
+                    parse_str(file_get_contents("php://input"), $post_vars);
+                    $_REQUEST = $post_vars;
+                }
+                //NOVO <<<<<
                 $obj = new $controller();
                 if ($obj instanceof ControllerInterface) {
                     switch ($reqMode) {
                         case "POST":
-                            $obj->create();
+                            $resp = $obj->create(new DefaultRequest());
                             break;
                         case "PUT":
-                            $obj->update();
+                            $resp = $obj->update(new DefaultRequest());
                             break;
                         case "GET":
-                            $obj->listar();
+                            $resp = $obj->listar(new DefaultRequest());
                             break;
                         case "DELETE":
-                            $obj->delete();
+                            $resp = $obj->delete(new DefaultRequest());
                             break;
                         default:
                             throw new Exception("Requisição inválida!");
+                    }
+                    if ($resp instanceof ResponseJsonInterface) {
+                        $resp->response();
+                    } else {
+                        throw new Exception("O Objeto retornado não é um response válido!");
                     }
                 } else {
                     throw new Exception("A classe {$controller} "
