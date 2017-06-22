@@ -7,21 +7,21 @@
  */
 class Produto implements ControllerInterface {
 
-    public function create() {
-        echo "Criar";
+    public function create(RequestInterface $req) {
+        
     }
 
-    public function delete() {
-        echo "deletar";
+    public function delete(RequestInterface $req) {
+        
     }
 
-    public function listar() {
-        $dao =new DaoProduto();
-        echo json_encode($dao->listarTodos());
+    public function listar(RequestInterface $req) {
+        $param = $req->getParam();
+        return new DefaultResponse($param);
     }
 
-    public function update() {
-        echo "atualizar";
+    public function update(RequestInterface $req) {
+        
     }
 
 }
