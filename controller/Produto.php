@@ -8,7 +8,7 @@
 class Produto implements ControllerInterface {
 
     public function create(RequestInterface $req) {
-        $pars = $req->getParams();
+        $pars = $req->getParam();
         if (!isset($pars['nome'])) {
             throw new Exception("o parametro nome é obrigatorio!");
         }
@@ -22,7 +22,7 @@ class Produto implements ControllerInterface {
     }
 
     public function delete(RequestInterface $req) {
-        $pars = $req->getParams();
+        $pars = $req->getParam();
         if (!isset($pars['id'])) {
             throw new Exception("o parametro id é obrigatorio!");
         }
@@ -36,7 +36,7 @@ class Produto implements ControllerInterface {
     }
 
     public function listar(RequestInterface $req) {
-        $params = $req->getParams();
+        $params = $req->getParam();
         $dp = new DaoProduto();
         if (isset($params['id'])) {
             $produtos = $dp->listar($params['id']);
@@ -47,7 +47,7 @@ class Produto implements ControllerInterface {
     }
 
     public function update(RequestInterface $req) {
-        $pars = $req->getParams();
+        $pars = $req->getParam();
         if (
                 (!isset($pars['nome']) ) ||
                 (!isset($pars['id']) )
