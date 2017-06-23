@@ -32,7 +32,7 @@ class ModelProduto {
         $this->nome = $nome;
     }
 
-    function __construct($id, $nome) {
+    function __construct($id, $nome=null) {
         $this->id = $id;
         $this->nome = $nome;
     }
