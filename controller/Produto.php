@@ -7,21 +7,61 @@
  */
 class Produto implements ControllerInterface {
 
-    public function create() {
-        echo "Criar";
+    public function create(RequestInterface $req) {
+        $pars = $req->getParams();
+        if (!isset($pars['nome'])) {
+            throw new Exception("o parametro nome é obrigatorio!");
+        }
+        $p = new ModelProduto(null, $pars['nome']);
+        $dp = new DaoProduto();
+        $dp->salvar($p);
+        $r = new DefaultResponse();
+        $r->setData(array('mensagem' =>
+            "registro salvo com sucesso!"));
+        return $r;
     }
 
-    public function delete() {
-        echo "deletar";
+    public function delete(RequestInterface $req) {
+        $pars = $req->getParams();
+        if (!isset($pars['id'])) {
+            throw new Exception("o parametro id é obrigatorio!");
+        }
+        $p = new ModelProduto($pars['id']);
+        $dp = new DaoProduto();
+        $dp->remover($p);
+        $r = new DefaultResponse();
+        $r->setData(array('mensagem' =>
+            "registro excluído com sucesso!"));
+        return $r;
     }
 
-    public function listar() {
-        $dao =new DaoProduto();
-        echo json_encode($dao->listarTodos());
+    public function listar(RequestInterface $req) {
+        $params = $req->getParams();
+        $dp = new DaoProduto();
+        if (isset($params['id'])) {
+            $produtos = $dp->listar($params['id']);
+        } else {
+            $produtos = $dp->listar();
+        }
+        return new DefaultResponse($produtos);
     }
 
-    public function update() {
-        echo "atualizar";
+    public function update(RequestInterface $req) {
+        $pars = $req->getParams();
+        if (
+                (!isset($pars['nome']) ) ||
+                (!isset($pars['id']) )
+        ) {
+            throw new Exception("o parametro nome e"
+            . " o parametro id são obrigatorios!");
+        }
+        $p = new ModelProduto($pars['id'], $pars['nome']);
+        $dp = new DaoProduto();
+        $dp->salvar($p);
+        $r = new DefaultResponse();
+        $r->setData(array('mensagem' =>
+            "registro salvo com sucesso!"));
+        return $r;
     }
 
 }
