@@ -16,12 +16,16 @@ class Connection {
 
     private function __construct() {
         try {
-            $this->pdo = new PDO("mysql:host=localhost; port=3306; dbname=test", "root", "", array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+            $this->pdo = new PDO("mysql:host=localhost; port=3306; dbname=test",
+                    "devel", "developer", array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         } catch (Exception $ex) {
             throw $ex;
         }
     }
-
+    /**
+     * 
+     * @return Connection
+     */
     static function getInstance() {
         if (self::$instance == null) {
             self::$instance = new Connection();
