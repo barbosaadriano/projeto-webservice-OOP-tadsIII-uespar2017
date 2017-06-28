@@ -12,7 +12,7 @@ class Produto implements ControllerInterface {
         if (!isset($pars['nome'])) {
             throw new Exception("o parametro nome é obrigatorio!");
         }
-        $p = new ModelProduto(null, $pars['nome']);
+        $p = new ModelProduto(null, addslashes(strip_tags($pars['nome'])));
         $dp = new DaoProduto();
         $dp->salvar($p);
         $r = new DefaultResponse();
@@ -55,7 +55,7 @@ class Produto implements ControllerInterface {
             throw new Exception("o parametro nome e"
             . " o parametro id são obrigatorios!");
         }
-        $p = new ModelProduto($pars['id'], $pars['nome']);
+        $p = new ModelProduto($pars['id'], addslashes(strip_tags($pars['nome'])));
         $dp = new DaoProduto();
         $dp->salvar($p);
         $r = new DefaultResponse();
