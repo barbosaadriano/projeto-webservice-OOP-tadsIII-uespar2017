@@ -47,6 +47,7 @@ class DaoProduto {
         try {
             $sth->execute();
             Connection::getInstance()->getPdo()->commit();
+            return $id;
         } catch (Exception $exc) {
             Connection::getInstance()->getPdo()->rollBack();
             throw $exc;

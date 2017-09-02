@@ -14,10 +14,10 @@ class Produto implements ControllerInterface {
         }
         $p = new ModelProduto(null, addslashes(strip_tags($pars['nome'])));
         $dp = new DaoProduto();
-        $dp->salvar($p);
+        $id = $dp->salvar($p);
         $r = new DefaultResponse();
         $r->setData(array('mensagem' =>
-            "registro salvo com sucesso!"));
+            "registro salvo com sucesso!",'id'=>$id));
         return $r;
     }
 
