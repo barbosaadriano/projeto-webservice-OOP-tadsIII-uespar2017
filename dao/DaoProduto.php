@@ -47,7 +47,10 @@ class DaoProduto {
         try {
             $sth->execute();
             Connection::getInstance()->getPdo()->commit();
-            return $id;
+            $sth = Connection::getInstance()->getPdo()->prepare("select id from produto order by id desc limit 1");
+            $sth->execute(); 
+            $res = $sth->fetch();
+            return (int) $res['id'];
         } catch (Exception $exc) {
             Connection::getInstance()->getPdo()->rollBack();
             throw $exc;
