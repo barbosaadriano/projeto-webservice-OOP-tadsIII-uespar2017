@@ -13,6 +13,7 @@ class App {
         $metodo = "default";
 
         $requestUrl = isset($_REQUEST['url']) ? $_REQUEST['url'] : "";
+        
         if ($requestUrl !== "") {
             $res = explode("/", $requestUrl);
             $controller = str_replace(" ", "", ucwords(str_replace("-", " ", strtolower($res[0]))));
