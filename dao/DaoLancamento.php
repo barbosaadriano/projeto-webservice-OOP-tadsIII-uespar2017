@@ -40,7 +40,7 @@ class DaoLancamento {
         if (!$p->getId()) {
             $sql = "insert into tbl_lancamentos "
                     . " ( id , data, descricao, own, valor, planoc_id ) values "
-                    . " ( :id, :data, :descricao, :own, :valor, :planoc_id )";
+                    . " ( :id, :data, :descricao, :own, :valor, :pcid )";
         } else {
             $sql = "update produto set data = :data, descricao = :descricao, "
                     . " own = :own, valor = :valor, planoc_id = :pcid"
