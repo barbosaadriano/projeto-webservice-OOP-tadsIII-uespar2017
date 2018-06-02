@@ -6,6 +6,11 @@
  * @author Administrador
  */
 class Lancamento implements ControllerInterface {
+    
+    private static $owns = [
+        '89550440000071606954' => 'ADRIANO',
+        '89550640439004333807' => 'FERNANDA',
+    ];
 
     public function create(RequestInterface $req) {
         $pars = $req->getParam();
@@ -24,7 +29,7 @@ class Lancamento implements ControllerInterface {
         if (!isset($pars['planoc_id'])) {
             throw new Exception("o parametro planoc_id é obrigatorio!");
         }
-        $p = new ModelLancamento(null, $pars['data'], $pars['descricao'], $pars['own'], $pars['valor'], $pars['planoc_id']
+        $p = new ModelLancamento(null, $pars['data'], $pars['descricao'], self::$owns[$pars['own']], $pars['valor'], $pars['planoc_id']
         );
         $dp = new DaoLancamento();
         $id = $dp->salvar($p);
@@ -69,7 +74,7 @@ class Lancamento implements ControllerInterface {
                 (!isset($pars['planoc_id']) ) ||
                 (!isset($pars['id']) )
         ) {
-            throw new Exception("o parametro data, desricao, own, valor, planoc_id e"
+            throw new Exception("o parametro data, descricao, own, valor, planoc_id e"
             . " o parametro id são obrigatorios!");
         }
         $p = new ModelLancamento(
