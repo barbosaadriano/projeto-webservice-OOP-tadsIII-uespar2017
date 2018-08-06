@@ -18,6 +18,7 @@ class ModelLancamento {
     private $descricao;
     private $own;
     private $valor;
+    private $tpDoc;
     private $planoId;
 
     function getId() {
@@ -68,12 +69,21 @@ class ModelLancamento {
         $this->planoId = $planoId;
     }
 
-    function __construct($id, $data=null, $descricao=null, $own=null, $valor=null, $planoId=null) {
+    function getTpDoc() {
+        return $this->tpDoc;
+    }
+
+    function setTpDoc($tpDoc) {
+        $this->tpDoc = $tpDoc;
+    }
+
+        function __construct($id, $data=null, $descricao=null, $own=null, $valor=null,$tpDoc=null, $planoId=null) {
         $this->id = $id;
         $this->data = $data;
         $this->descricao = $descricao;
         $this->own = $own;
         $this->valor = $valor;
+        $this->tpDoc = $tpDoc;
         $this->planoId = $planoId;
     }
 

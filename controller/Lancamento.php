@@ -26,10 +26,13 @@ class Lancamento implements ControllerInterface {
         if (!isset($pars['valor'])) {
             throw new Exception("o parametro valor é obrigatorio!");
         }
+        if (!isset($pars['tp_doc'])) {
+            throw new Exception("o parametro tipo de documento é obrigatorio!");
+        }
         if (!isset($pars['planoc_id'])) {
             throw new Exception("o parametro planoc_id é obrigatorio!");
         }
-        $p = new ModelLancamento(null, $pars['data'], $pars['descricao'], self::$owns[$pars['own']], $pars['valor'], $pars['planoc_id']
+        $p = new ModelLancamento(null, $pars['data'], $pars['descricao'], self::$owns[$pars['own']], $pars['valor'],$pars['tp_doc'], $pars['planoc_id']
         );
         $dp = new DaoLancamento();
         $id = $dp->salvar($p);

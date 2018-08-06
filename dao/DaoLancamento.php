@@ -22,7 +22,7 @@ class DaoLancamento {
         $out = array();
         foreach ($res as $ln) {
             $p = new ModelLancamento(
-                    $ln['id'], $ln['data'], $ln['descricao'], $ln['own'], $ln['valor'], $ln['planoc_id']
+                    $ln['id'], $ln['data'], $ln['descricao'], $ln['own'], $ln['valor'],$ln['tp_doc'], $ln['planoc_id']
             );
             $out[] = (array) $p;
         }
@@ -36,14 +36,15 @@ class DaoLancamento {
         $data = $p->getData();
         $own = $p->getOwn();
         $valor = $p->getValor();
+        $tpDoc = $p->getTpDoc();
         $pcid = $p->getPlanoId();
         if (!$p->getId()) {
             $sql = "insert into tbl_lancamentos "
-                    . " ( id , data, descricao, own, valor, planoc_id ) values "
-                    . " ( :id, :data, :descricao, :own, :valor, :pcid )";
+                    . " ( id , data, descricao, own, valor, tp_doc, planoc_id ) values "
+                    . " ( :id, :data, :descricao, :own, :valor, :tp_doc, :pcid )";
         } else {
             $sql = "update tbl_lancamentos set data = :data, descricao = :descricao, "
-                    . " own = :own, valor = :valor, planoc_id = :pcid"
+                    . " own = :own, valor = :valor, tp_doc = :tp_doc, planoc_id = :pcid"
                     . " where id = :id ";
             $id = $p->getId();
         }
@@ -54,6 +55,7 @@ class DaoLancamento {
         $sth->bindValue("data", $data);
         $sth->bindValue("own", $own);
         $sth->bindValue("valor", $valor);
+        $sth->bindValue("tp_doc", $tpDoc);
         $sth->bindValue("pcid", $pcid);
         try {
             $sth->execute();
